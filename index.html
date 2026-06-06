@@ -8,7 +8,6 @@
     <link rel="canonical" href="https://shabd-srivastava.netlify.app" />
     <meta property="og:title" content="Shabd Srivastava — Machine Learning Engineer & Full Stack Developer" />
     <meta property="og:description" content="Machine Learning Engineer and Full Stack Developer building reliable AI-powered applications and production-ready web platforms." />
-    <meta property="og:image" content="https://shabd-srivastava.netlify.app/og-image.png" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="styles.css" />
@@ -25,25 +24,37 @@
           <span class="brand-subtitle">ML Engineer &amp; Full Stack Dev</span>
         </div>
         <div class="nav-links">
-          <a href="#projects">Projects</a>
           <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
           <a href="https://github.com/Shades19-afk" target="_blank" rel="noreferrer">GitHub</a>
           <a href="https://www.linkedin.com/in/shabd-srivastava-88904129a/" target="_blank" rel="noreferrer">LinkedIn</a>
         </div>
       </nav>
 
-      <!-- Hero -->
-      <section class="hero fade-up">
-        <div class="hero-eyebrow">
-          <span class="hero-dot"></span>
-          <span class="hero-eyebrow-text">Student · IIEST Shibpur</span>
+      <!-- About -->
+      <section id="about" class="section fade-up" style="margin-top: 0;">
+        <div class="section-row">
+          <span class="section-label">About</span>
+          <span class="section-rule"></span>
         </div>
-        <h1>Full-stack systems, <em>AI models,</em> and the infrastructure behind them.</h1>
-        <p class="hero-copy">
-          I build web platforms and machine learning workflows for teams at the
-          intersection of software engineering and applied AI — from model training
-          pipelines to production-ready interfaces.
-        </p>
+        <div class="about-block">
+          <p class="about-bio">
+            I'm <strong>Shabd Srivastava</strong>, a 2nd-year IT student at <strong>IIEST Shibpur</strong>, one of India's oldest and most reputed engineering institutions. I build things end-to-end, from architecture to deployment, and I care about making them work under real conditions, not just in development.
+          </p>
+          <p class="about-bio" style="margin-top: 14px;">
+            Over the last year, I've shipped a production LLM-powered platform with real users, trained and deployed a medical imaging classifier on Hugging Face, and run a web stack. My work sits across full-stack development and machine learning — <strong>React, Next.js, TypeScript, Node.js</strong> on one side, and <strong>Python, TensorFlow, and Keras</strong> on the other.
+          </p>
+          <p class="about-bio" style="margin-top: 14px;">
+            I don't build things to check boxes. Most of my projects started from a genuine frustration or curiosity — a PDF tool that actually thinks, a diagnostic model that shows its reasoning, a fest website that doesn't go down when it matters most.
+          </p>
+          <a href="Shabd_Srivastava_Resume.pdf" class="resume-btn" download>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3v13M7 11l5 5 5-5M4 20h16"/>
+            </svg>
+            Download Résumé
+          </a>
+        </div>
       </section>
 
       <!-- Projects -->
@@ -62,7 +73,7 @@
               </div>
               <div class="work-extra">
                 <span class="work-year">Next.js · TypeScript · Supabase</span>
-                <span class="arrow">↓</span>
+                <span class="arrow">↑</span>
               </div>
             </button>
             <div class="work-detail">
@@ -83,14 +94,14 @@
               </div>
               <div class="work-extra">
                 <span class="work-year">TensorFlow · Python · Hugging Face</span>
-                <span class="arrow">↓</span>
+                <span class="arrow">↑</span>
               </div>
             </button>
             <div class="work-detail">
               <p>
-                Explainable pneumonia detection system using DenseNet121, ResNet50,
-                and EfficientNet with Grad-CAM saliency visualizations. Deployed on
-                Hugging Face Spaces with a live inference interface.
+                Explainable pneumonia detection using DenseNet121, ResNet50, and EfficientNet
+                with Grad-CAM saliency visualizations. Deployed on Hugging Face Spaces with
+                a live inference interface.
               </p>
               <a href="https://huggingface.co/spaces/Shades19/disease-detect" class="project-link" target="_blank" rel="noreferrer">View project →</a>
             </div>
@@ -99,26 +110,13 @@
         </div>
       </section>
 
-      <!-- About / Work -->
-      <section id="about" class="section fade-up">
+      <!-- Experience -->
+      <section id="experience" class="section fade-up">
         <div class="section-row">
-          <span class="section-label">About Me</span>
+          <span class="section-label">Experience</span>
           <span class="section-rule"></span>
         </div>
-
-        <p class="about-bio">
-          I'm a <strong>Computer Science student at IIEST Shibpur</strong> with a focus on
-          machine learning and full-stack engineering. I enjoy building things that bridge
-          the gap between research and real-world software — whether that's a production
-          web platform or a trained model with a clean deployment.
-        </p>
-
-        <div class="section-row" style="margin-top: 44px;">
-          <span class="section-label">My Work</span>
-          <span class="section-rule"></span>
-        </div>
-
-        <div class="work-list" style="margin-bottom: 44px;">
+        <div class="work-list">
           <div class="work-item">
             <button class="work-row" type="button">
               <div class="work-meta">
@@ -127,19 +125,22 @@
               </div>
               <div class="work-extra">
                 <span class="work-year">Registration · Deployment</span>
-                <span class="arrow">↓</span>
+                <span class="arrow">↑</span>
               </div>
             </button>
             <div class="work-detail">
               <p>
-                Built and maintained registration workflows for the annual fest,
-                managed deployment infrastructure, and supported high-traffic event
-                operations under live load.
+                Built and maintained registration workflows for the annual fest, managed
+                deployment infrastructure, and supported high-traffic event operations
+                under live load.
               </p>
             </div>
           </div>
         </div>
+      </section>
 
+      <!-- Skills -->
+      <section class="section fade-up">
         <div class="section-row">
           <span class="section-label">Skills</span>
           <span class="section-rule"></span>
@@ -148,13 +149,32 @@
           <span class="skill-pill">React</span>
           <span class="skill-pill">Next.js</span>
           <span class="skill-pill">TypeScript</span>
+          <span class="skill-pill">JavaScript</span>
           <span class="skill-pill">Python</span>
+          <span class="skill-pill">Java</span>
+          <span class="skill-pill">C / C++</span>
           <span class="skill-pill">TensorFlow</span>
-          <span class="skill-pill">PostgreSQL</span>
+          <span class="skill-pill">Keras</span>
+          <span class="skill-pill">Node.js</span>
           <span class="skill-pill">Supabase</span>
+          <span class="skill-pill">Docker</span>
           <span class="skill-pill">TailwindCSS</span>
+          <span class="skill-pill">Hugging Face</span>
         </div>
 
+        <div class="section-row" style="margin-top: 28px;">
+          <span class="section-label">Domains</span>
+          <span class="section-rule"></span>
+        </div>
+        <div class="skills-grid">
+          <span class="skill-pill">Full-Stack Dev</span>
+          <span class="skill-pill">LLM Integration</span>
+          <span class="skill-pill">Deep Learning</span>
+          <span class="skill-pill">Computer Vision</span>
+          <span class="skill-pill">REST APIs</span>
+          <span class="skill-pill">CI/CD</span>
+          <span class="skill-pill">Model Deployment</span>
+        </div>
       </section>
 
     </main>
@@ -168,7 +188,6 @@
         <a href="mailto:shabdsrivastava19@gmail.com">Email</a>
         <a href="https://github.com/Shades19-afk" target="_blank" rel="noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/shabd-srivastava-88904129a/" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="#" target="_blank" rel="noreferrer">Resume</a>
       </div>
     </footer>
 
