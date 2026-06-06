@@ -42,7 +42,7 @@ a {
 .page-nav {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 18px;
   margin-bottom: 60px;
   position: sticky;
@@ -51,20 +51,42 @@ a {
 }
 
 .brand {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.brand-name {
   font-size: 13px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   font-variant: small-caps;
   color: var(--text);
 }
 
+.brand-subtitle {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 .nav-links {
   display: flex;
-  gap: 24px;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 4px;
 }
 
 .nav-links a {
   font-size: 12px;
   color: var(--muted);
+  transition: color 180ms ease;
+}
+
+.nav-links a:hover,
+.footer-links a:hover {
+  color: var(--text);
 }
 
 .section-label {
