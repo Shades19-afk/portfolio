@@ -27,6 +27,7 @@
           <a href="#about">About</a>
           <a href="#projects">Projects</a>
           <a href="#experience">Experience</a>
+          <a href="#education">Education</a>
           <a href="https://github.com/Shades19-afk" target="_blank" rel="noreferrer">GitHub</a>
           <a href="https://www.linkedin.com/in/shabd-srivastava-88904129a/" target="_blank" rel="noreferrer">LinkedIn</a>
         </div>
@@ -40,13 +41,13 @@
         </div>
         <div class="about-block">
           <p class="about-bio">
-            I'm <strong>Shabd Srivastava</strong>, a 2nd-year IT student at <strong>IIEST Shibpur</strong>, one of India's oldest and most reputed engineering institutions. I build things end-to-end, from architecture to deployment, and I care about making them work under real conditions, not just in development.
+            I'm <strong>Shabd Srivastava</strong>, an Information Technology student at <strong>IIEST Shibpur</strong>. I build things end-to-end — architecture through deployment — and care about how they hold up under real load, not just in development.
           </p>
           <p class="about-bio" style="margin-top: 14px;">
-            Over the last year, I've shipped a production LLM-powered platform with real users, trained and deployed a medical imaging classifier on Hugging Face, and run a web stack. My work sits across full-stack development and machine learning, <strong>React, Next.js, TypeScript, Node.js</strong> on one side, and <strong>Python, TensorFlow, and Keras</strong> on the other.
+            My work spans full-stack development and machine learning: <strong>React, Next.js, TypeScript, Node.js</strong> on one side, <strong>Python, TensorFlow, and Keras</strong> on the other.
           </p>
           <p class="about-bio" style="margin-top: 14px;">
-            I don't build things to check boxes. Most of my projects started from a genuine frustration or curiosity, a PDF tool that actually thinks, a diagnostic model that shows its reasoning, a fest website that doesn't go down when it matters most.
+            I don't build to check boxes. Most of my projects came from genuine curiosity: a document tool that actually reasons, a diagnostic model that explains itself, and a fest website that stayed up when 500+ people hit it at once.
           </p>
           <a href="Shabd_Srivastava_Resume.pdf" class="resume-btn" download>
             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -68,8 +69,32 @@
           <div class="work-item">
             <button class="work-row" type="button">
               <div class="work-meta">
+                <span class="work-title">Shawty</span>
+                <span class="work-tag">URL Shortener · System Design</span>
+              </div>
+              <div class="work-extra">
+                <span class="work-year">TypeScript · PostgreSQL · Redis</span>
+                <span class="arrow">↑</span>
+              </div>
+            </button>
+            <div class="work-detail">
+              <p>
+                Redis-backed caching, rate limiting, and async click logging with a fail-open
+                Postgres path when Redis is unavailable. Link expiration returns a proper 410,
+                cache TTL is checked on every hit, and a Postgres UNIQUE constraint makes custom
+                short codes race-safe. Runs as three replicas behind nginx in Docker Compose,
+                with Kubernetes manifests validated on kind. Includes 34 unit tests, 13
+                integration tests, GitHub Actions CI, and a CTE-based analytics query.
+              </p>
+              <a href="https://github.com/Shades19-afk/Shawty" class="project-link" target="_blank" rel="noreferrer">View on GitHub →</a>
+            </div>
+          </div>
+
+          <div class="work-item">
+            <button class="work-row" type="button">
+              <div class="work-meta">
                 <span class="work-title">DocuMind</span>
-                <span class="work-tag">AI Document Intelligence</span>
+                <span class="work-tag">AI-Powered Document Intelligence</span>
               </div>
               <div class="work-extra">
                 <span class="work-year">Next.js · TypeScript · Supabase</span>
@@ -78,11 +103,15 @@
             </button>
             <div class="work-detail">
               <p>
-                AI-powered document intelligence platform with authentication workflows
-                and real-time document processing. Built on Next.js, TypeScript, and
-                Supabase with server-side rendering and edge functions.
+                Full-stack platform where users upload PDFs and receive LLM-generated summaries,
+                flashcards, and study notes. Uses Supabase auth and Postgres row-level security,
+                modular REST APIs, typed failure states, retries, and fallback persistence for
+                provider errors and rate limits. Migrated from Gemini to OpenRouter after fixing
+                a PDF parsing dependency that failed silently in serverless, then deployed on
+                Vercel with environment-based configuration and CI/CD.
               </p>
-              <a href="https://documind-oam2.vercel.app" class="project-link" target="_blank" rel="noreferrer">View project →</a>
+              <a href="https://documind-oam2.vercel.app/" class="project-link" target="_blank" rel="noreferrer">View website →</a>
+              <a href="https://github.com/Shades19-afk/documind" class="project-link" target="_blank" rel="noreferrer">View on GitHub →</a>
             </div>
           </div>
 
@@ -90,20 +119,24 @@
             <button class="work-row" type="button">
               <div class="work-meta">
                 <span class="work-title">DiseaseDetect</span>
-                <span class="work-tag">Medical AI · Computer Vision</span>
+                <span class="work-tag">Explainable Medical Image Classification</span>
               </div>
               <div class="work-extra">
-                <span class="work-year">TensorFlow · Python · Hugging Face</span>
+                <span class="work-year">TensorFlow · Python · Grad-CAM</span>
                 <span class="arrow">↑</span>
               </div>
             </button>
             <div class="work-detail">
               <p>
-                Explainable pneumonia detection using DenseNet121, ResNet50, and EfficientNet
-                with Grad-CAM saliency visualizations. Deployed on Hugging Face Spaces with
-                a live inference interface.
+                Compared DenseNet121, ResNet50, and EfficientNetB0 for pneumonia detection from
+                chest X-rays, with DenseNet121 reaching 92% ROC-AUC. Added Grad-CAM overlays,
+                augmentation ablation, reproducible splits, checkpointing, and TensorBoard
+                tracking. Evaluated ROC-AUC, F1, precision, recall, confusion matrices, and
+                false-positive/false-negative breakdowns, then deployed the Streamlit app on
+                Hugging Face Spaces.
               </p>
-              <a href="https://huggingface.co/spaces/Shades19/disease-detect" class="project-link" target="_blank" rel="noreferrer">View project →</a>
+              <a href="https://huggingface.co/spaces/Shades19/disease-detect" class="project-link" target="_blank" rel="noreferrer">View website →</a>
+              <a href="https://github.com/Shades19-afk/DiseaseDetection" class="project-link" target="_blank" rel="noreferrer">View on GitHub →</a>
             </div>
           </div>
 
@@ -120,20 +153,43 @@
           <div class="work-item">
             <button class="work-row" type="button">
               <div class="work-meta">
-                <span class="work-title">Rebecca Annual Fest</span>
+                <span class="work-title">Rebeca, Annual Fest</span>
                 <span class="work-tag">Web Development Associate</span>
               </div>
               <div class="work-extra">
-                <span class="work-year">Registration · Deployment</span>
+                <span class="work-year">IIEST Shibpur · Jan–Apr 2026</span>
                 <span class="arrow">↑</span>
               </div>
             </button>
             <div class="work-detail">
               <p>
-                Built and maintained registration workflows for the annual fest, managed
-                deployment infrastructure, and supported high-traffic event operations
-                under live load.
+                Built the fest website end-to-end with a responsive UI that held up under 500+
+                concurrent users during peak registration. Set up registration and submission
+                forms for 10+ events, handled deployment and hosting personally, shipped live
+                fixes during the busiest days, and worked with the branding team to align the
+                site with the fest's design and messaging.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section id="education" class="section fade-up">
+        <div class="section-row">
+          <span class="section-label">Education</span>
+          <span class="section-rule"></span>
+        </div>
+        <div class="work-list">
+          <div class="work-item">
+            <div class="work-row">
+              <div class="work-meta">
+                <span class="work-title">Indian Institute of Engineering Science &amp; Technology, Shibpur</span>
+                <span class="work-tag">B.Tech, Information Technology · West Bengal, India</span>
+              </div>
+              <div class="work-extra">
+                <span class="work-year">2024–2028</span>
+              </div>
             </div>
           </div>
         </div>
@@ -152,14 +208,19 @@
           <span class="skill-pill">JavaScript</span>
           <span class="skill-pill">Python</span>
           <span class="skill-pill">Java</span>
-          <span class="skill-pill">C / C++</span>
+          <span class="skill-pill">SQL</span>
+          <span class="skill-pill">C</span>
+          <span class="skill-pill">C++</span>
           <span class="skill-pill">TensorFlow</span>
           <span class="skill-pill">Keras</span>
           <span class="skill-pill">Node.js</span>
+          <span class="skill-pill">Express</span>
           <span class="skill-pill">Supabase</span>
           <span class="skill-pill">Docker</span>
+          <span class="skill-pill">Kubernetes</span>
           <span class="skill-pill">TailwindCSS</span>
-          <span class="skill-pill">Hugging Face</span>
+          <span class="skill-pill">Streamlit</span>
+          <span class="skill-pill">Git</span>
         </div>
 
         <div class="section-row" style="margin-top: 28px;">
@@ -173,6 +234,7 @@
           <span class="skill-pill">Computer Vision</span>
           <span class="skill-pill">REST APIs</span>
           <span class="skill-pill">CI/CD</span>
+          <span class="skill-pill">System Design</span>
           <span class="skill-pill">Model Deployment</span>
         </div>
       </section>
@@ -185,6 +247,7 @@
         <span>Open to internships &amp; early-stage roles</span>
       </div>
       <div class="footer-links">
+        <a href="tel:+918736914818">+91 8736914818</a>
         <a href="mailto:shabdsrivastava19@gmail.com">Email</a>
         <a href="https://github.com/Shades19-afk" target="_blank" rel="noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/shabd-srivastava-88904129a/" target="_blank" rel="noreferrer">LinkedIn</a>
