@@ -1,259 +1,242 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shabd Srivastava — Machine Learning Engineer & Full Stack Developer</title>
-    <meta name="description" content="Machine Learning Engineer and Full Stack Developer building reliable AI-powered applications and production-ready web platforms." />
-    <link rel="canonical" href="https://shabd-srivastava.netlify.app" />
-    <meta property="og:title" content="Shabd Srivastava — Machine Learning Engineer & Full Stack Developer" />
-    <meta property="og:description" content="Machine Learning Engineer and Full Stack Developer building reliable AI-powered applications and production-ready web platforms." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div id="cursor"></div>
-
-    <main class="page-shell">
-
-      <!-- Nav -->
-      <nav class="page-nav fade-up">
-        <div class="brand">
-          <span class="brand-name">Shabd Srivastava</span>
-          <span class="brand-subtitle">Machine Learning Engineer &amp; Full Stack Developer</span>
-        </div>
-        <div class="nav-links">
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#experience">Experience</a>
-          <a href="#education">Education</a>
-          <a href="https://github.com/Shades19-afk" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="https://www.linkedin.com/in/shabd-srivastava-88904129a/" target="_blank" rel="noreferrer">LinkedIn</a>
-        </div>
-      </nav>
-
-      <!-- About -->
-      <section id="about" class="section fade-up" style="margin-top: 0;">
-        <div class="section-row">
-          <span class="section-label">About</span>
-          <span class="section-rule"></span>
-        </div>
-        <div class="about-block">
-          <p class="about-bio">
-            I'm <strong>Shabd Srivastava</strong>, an Information Technology student at <strong>IIEST Shibpur</strong>. I build things end-to-end — architecture through deployment — and care about how they hold up under real load, not just in development.
-          </p>
-          <p class="about-bio" style="margin-top: 14px;">
-            My work spans full-stack development and machine learning: <strong>React, Next.js, TypeScript, Node.js</strong> on one side, <strong>Python, TensorFlow, and Keras</strong> on the other.
-          </p>
-          <p class="about-bio" style="margin-top: 14px;">
-            I don't build to check boxes. Most of my projects came from genuine curiosity: a document tool that actually reasons, a diagnostic model that explains itself, and a fest website that stayed up when 500+ people hit it at once.
-          </p>
-          <a href="Shabd_Srivastava_Resume.pdf" class="resume-btn" download>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 3v13M7 11l5 5 5-5M4 20h16"/>
-            </svg>
-            Download Résumé
-          </a>
-        </div>
-      </section>
-
-      <!-- Projects -->
-      <section id="projects" class="section fade-up">
-        <div class="section-row">
-          <span class="section-label">My Projects</span>
-          <span class="section-rule"></span>
-        </div>
-        <div class="work-list">
-
-          <div class="work-item">
-            <button class="work-row" type="button">
-              <div class="work-meta">
-                <span class="work-title">Shawty</span>
-                <span class="work-tag">URL Shortener · System Design</span>
-              </div>
-              <div class="work-extra">
-                <span class="work-year">TypeScript · PostgreSQL · Redis</span>
-                <span class="arrow">↑</span>
-              </div>
-            </button>
-            <div class="work-detail">
-              <p>
-                Redis-backed caching, rate limiting, and async click logging with a fail-open
-                Postgres path when Redis is unavailable. Link expiration returns a proper 410,
-                cache TTL is checked on every hit, and a Postgres UNIQUE constraint makes custom
-                short codes race-safe. Runs as three replicas behind nginx in Docker Compose,
-                with Kubernetes manifests validated on kind. Includes 34 unit tests, 13
-                integration tests, GitHub Actions CI, and a CTE-based analytics query.
-              </p>
-              <a href="https://github.com/Shades19-afk/Shawty" class="project-link" target="_blank" rel="noreferrer">View on GitHub →</a>
-            </div>
-          </div>
-
-          <div class="work-item">
-            <button class="work-row" type="button">
-              <div class="work-meta">
-                <span class="work-title">DocuMind</span>
-                <span class="work-tag">AI-Powered Document Intelligence</span>
-              </div>
-              <div class="work-extra">
-                <span class="work-year">Next.js · TypeScript · Supabase</span>
-                <span class="arrow">↑</span>
-              </div>
-            </button>
-            <div class="work-detail">
-              <p>
-                Full-stack platform where users upload PDFs and receive LLM-generated summaries,
-                flashcards, and study notes. Uses Supabase auth and Postgres row-level security,
-                modular REST APIs, typed failure states, retries, and fallback persistence for
-                provider errors and rate limits. Migrated from Gemini to OpenRouter after fixing
-                a PDF parsing dependency that failed silently in serverless, then deployed on
-                Vercel with environment-based configuration and CI/CD.
-              </p>
-              <a href="https://documind-oam2.vercel.app/" class="project-link" target="_blank" rel="noreferrer">View website →</a>
-              <a href="https://github.com/Shades19-afk/documind" class="project-link" target="_blank" rel="noreferrer">View on GitHub →</a>
-            </div>
-          </div>
-
-          <div class="work-item">
-            <button class="work-row" type="button">
-              <div class="work-meta">
-                <span class="work-title">DiseaseDetect</span>
-                <span class="work-tag">Explainable Medical Image Classification</span>
-              </div>
-              <div class="work-extra">
-                <span class="work-year">TensorFlow · Python · Grad-CAM</span>
-                <span class="arrow">↑</span>
-              </div>
-            </button>
-            <div class="work-detail">
-              <p>
-                Compared DenseNet121, ResNet50, and EfficientNetB0 for pneumonia detection from
-                chest X-rays, with DenseNet121 reaching 92% ROC-AUC. Added Grad-CAM overlays,
-                augmentation ablation, reproducible splits, checkpointing, and TensorBoard
-                tracking. Evaluated ROC-AUC, F1, precision, recall, confusion matrices, and
-                false-positive/false-negative breakdowns, then deployed the Streamlit app on
-                Hugging Face Spaces.
-              </p>
-              <a href="https://huggingface.co/spaces/Shades19/disease-detect" class="project-link" target="_blank" rel="noreferrer">View website →</a>
-              <a href="https://github.com/Shades19-afk/DiseaseDetection" class="project-link" target="_blank" rel="noreferrer">View on GitHub →</a>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- Experience -->
-      <section id="experience" class="section fade-up">
-        <div class="section-row">
-          <span class="section-label">Experience</span>
-          <span class="section-rule"></span>
-        </div>
-        <div class="work-list">
-          <div class="work-item">
-            <button class="work-row" type="button">
-              <div class="work-meta">
-                <span class="work-title">Rebeca, Annual Fest</span>
-                <span class="work-tag">Web Development Associate</span>
-              </div>
-              <div class="work-extra">
-                <span class="work-year">IIEST Shibpur · Jan–Apr 2026</span>
-                <span class="arrow">↑</span>
-              </div>
-            </button>
-            <div class="work-detail">
-              <p>
-                Built the fest website end-to-end with a responsive UI that held up under 500+
-                concurrent users during peak registration. Set up registration and submission
-                forms for 10+ events, handled deployment and hosting personally, shipped live
-                fixes during the busiest days, and worked with the branding team to align the
-                site with the fest's design and messaging.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Education -->
-      <section id="education" class="section fade-up">
-        <div class="section-row">
-          <span class="section-label">Education</span>
-          <span class="section-rule"></span>
-        </div>
-        <div class="work-list">
-          <div class="work-item">
-            <div class="work-row">
-              <div class="work-meta">
-                <span class="work-title">Indian Institute of Engineering Science &amp; Technology, Shibpur</span>
-                <span class="work-tag">B.Tech, Information Technology · West Bengal, India</span>
-              </div>
-              <div class="work-extra">
-                <span class="work-year">2024–2028</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Skills -->
-      <section class="section fade-up">
-        <div class="section-row">
-          <span class="section-label">Skills</span>
-          <span class="section-rule"></span>
-        </div>
-        <div class="skills-grid">
-          <span class="skill-pill">React</span>
-          <span class="skill-pill">Next.js</span>
-          <span class="skill-pill">TypeScript</span>
-          <span class="skill-pill">JavaScript</span>
-          <span class="skill-pill">Python</span>
-          <span class="skill-pill">Java</span>
-          <span class="skill-pill">SQL</span>
-          <span class="skill-pill">C</span>
-          <span class="skill-pill">C++</span>
-          <span class="skill-pill">TensorFlow</span>
-          <span class="skill-pill">Keras</span>
-          <span class="skill-pill">Node.js</span>
-          <span class="skill-pill">Express</span>
-          <span class="skill-pill">Supabase</span>
-          <span class="skill-pill">Docker</span>
-          <span class="skill-pill">Kubernetes</span>
-          <span class="skill-pill">TailwindCSS</span>
-          <span class="skill-pill">Streamlit</span>
-          <span class="skill-pill">Git</span>
-        </div>
-
-        <div class="section-row" style="margin-top: 28px;">
-          <span class="section-label">Domains</span>
-          <span class="section-rule"></span>
-        </div>
-        <div class="skills-grid">
-          <span class="skill-pill">Full-Stack Dev</span>
-          <span class="skill-pill">LLM Integration</span>
-          <span class="skill-pill">Deep Learning</span>
-          <span class="skill-pill">Computer Vision</span>
-          <span class="skill-pill">REST APIs</span>
-          <span class="skill-pill">CI/CD</span>
-          <span class="skill-pill">System Design</span>
-          <span class="skill-pill">Model Deployment</span>
-        </div>
-      </section>
-
-    </main>
-
-    <footer id="footer" class="page-footer fade-up">
-      <div class="footer-left">
-        <span class="status-dot"></span>
-        <span>Open to internships &amp; early-stage roles</span>
-      </div>
-      <div class="footer-links">
-        <a href="tel:+918736914818">+91 8736914818</a>
-        <a href="mailto:shabdsrivastava19@gmail.com">Email</a>
-        <a href="https://github.com/Shades19-afk" target="_blank" rel="noreferrer">GitHub</a>
-        <a href="https://www.linkedin.com/in/shabd-srivastava-88904129a/" target="_blank" rel="noreferrer">LinkedIn</a>
-      </div>
-    </footer>
-
-    <script src="script.js"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shabd Srivastava — ML Engineer & Full Stack Developer</title>
+  <meta name="description" content="Portfolio of Shabd Srivastava, a machine learning engineer and full stack developer.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0b10; --card: #12141d; --card-2: #171a25; --text: #eae8e1;
+      --dim: #8d8f9c; --blue: #6a8dff; --amber: #ffb020; --line: #252938;
+      --heading: "Space Grotesk", sans-serif; --mono: "JetBrains Mono", monospace;
+      --max: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); font-size: 14px; line-height: 1.7; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    button { color: inherit; font: inherit; }
+    ::selection { background: var(--blue); color: var(--bg); }
+    #network { position: fixed; inset: 0; z-index: -2; opacity: .42; pointer-events: none; }
+    .noise { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E"); }
+    #progress { position: fixed; top: 0; left: 0; z-index: 20; height: 2px; width: 0; background: linear-gradient(90deg, var(--blue), var(--amber)); }
+    .preloader { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; padding: 24px; background: var(--bg); transition: opacity .7s ease, visibility .7s; }
+    .preloader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+    .boot { width: min(680px, 100%); color: var(--dim); font-size: clamp(12px, 2vw, 14px); }
+    .boot-line { min-height: 1.7em; }
+    .boot-line:last-child { color: var(--text); }
+    .cursor-char { display: inline-block; width: .6em; height: 1.1em; margin-left: 3px; vertical-align: -.15em; background: var(--amber); animation: blink 1s steps(1) infinite; }
+    .editor-header { position: fixed; top: 2px; left: 0; right: 0; z-index: 10; height: 57px; display: flex; align-items: end; padding: 0 max(20px, calc((100% - var(--max)) / 2)); background: rgba(10,11,16,.88); border-bottom: 1px solid var(--line); backdrop-filter: blur(14px); }
+    .tabs { display: flex; width: 100%; height: 100%; align-items: end; overflow-x: auto; scrollbar-width: none; }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab { position: relative; display: flex; align-items: center; gap: 9px; height: 100%; padding: 0 20px; color: var(--dim); white-space: nowrap; font-size: 12px; transition: color .25s; }
+    .tab:first-child { padding-left: 0; padding-right: 24px; }
+    .tab.active, .tab:hover { color: var(--text); }
+    .tab-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+    .tab:nth-child(2) .tab-dot, .tab:nth-child(4) .tab-dot { background: var(--amber); }
+    .tab:nth-child(3) .tab-dot { background: #b06aff; }
+    .tab:nth-child(5) .tab-dot { background: #6affba; }
+    .tab-indicator { position: absolute; bottom: -1px; height: 2px; background: var(--blue); transition: left .35s ease, width .35s ease; }
+    main, footer { width: min(var(--max), calc(100% - 48px)); margin-inline: auto; }
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 0 70px; }
+    .eyebrow, .section-kicker { color: var(--amber); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
+    .hero h1 { max-width: 850px; margin: 18px 0 22px; font: 700 clamp(4rem, 12vw, 9.5rem)/.88 var(--heading); letter-spacing: -.075em; }
+    .hero h1 span { display: block; overflow: hidden; }
+    .hero h1 b { display: block; transform: translateY(110%); animation: rise .9s cubic-bezier(.2,.8,.2,1) forwards; }
+    .hero h1 span:nth-child(2) b { color: var(--blue); animation-delay: .12s; }
+    .hero-intro { max-width: 670px; color: var(--dim); font-size: 15px; opacity: 0; animation: up .7s .5s forwards; }
+    .type-cursor { display: inline-block; width: 8px; height: 1.1em; margin-left: 5px; vertical-align: -.2em; background: var(--amber); animation: blink 1s steps(1) infinite; }
+    .hero-bottom { margin-top: 58px; opacity: 0; animation: up .7s .7s forwards; }
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(90px, 1fr)); max-width: 610px; margin-bottom: 34px; }
+    .stat { padding-right: 22px; border-right: 1px solid var(--line); }
+    .stat:not(:first-child) { padding-left: 22px; }
+    .stat:last-child { border: 0; }
+    .stat strong { display: block; font: 600 27px var(--heading); color: var(--text); }
+    .stat small { color: var(--dim); font-size: 10px; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 21px; border: 1px solid var(--blue); color: var(--text); transition: background .25s, color .25s, transform .25s; }
+    .button.primary { background: var(--blue); color: var(--bg); }
+    .button:hover { background: var(--amber); border-color: var(--amber); color: var(--bg); transform: translateY(-2px); }
+    section { padding: 110px 0; scroll-margin-top: 70px; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .section-heading { display: flex; align-items: center; gap: 18px; margin-bottom: 42px; }
+    .section-heading h2 { margin: 0; font: 600 clamp(24px, 4vw, 39px) var(--heading); letter-spacing: -.045em; }
+    .section-heading::after { content: ""; height: 1px; flex: 1; background: var(--line); }
+    .section-heading small { color: var(--dim); font-size: 11px; }
+    .about-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 54px; }
+    .terminal-card, .project-card { background: rgba(18,20,29,.83); border: 1px solid var(--line); }
+    .terminal-top { display: flex; gap: 7px; padding: 15px 18px; border-bottom: 1px solid var(--line); }
+    .traffic { width: 9px; height: 9px; border-radius: 50%; background: #ff5f56; }
+    .traffic:nth-child(2) { background: #ffbd2e; } .traffic:nth-child(3) { background: #27c93f; }
+    .terminal-body { padding: 29px; }
+    .terminal-body p { margin: 0 0 22px; color: var(--dim); }
+    .terminal-body p::first-letter { color: var(--amber); }
+    .prompt { color: var(--amber); }
+    .terminal-body strong { color: var(--text); font-weight: 500; }
+    .data-table { border-top: 1px solid var(--line); }
+    .data-row { display: grid; grid-template-columns: 110px 1fr; gap: 18px; padding: 15px 0; border-bottom: 1px solid var(--line); }
+    .data-row dt { color: var(--dim); } .data-row dd { margin: 0; color: var(--text); }
+    .status { color: #6affba !important; }
+    .carousel-wrap { position: relative; }
+    .project-card { min-height: 470px; padding: clamp(25px, 5vw, 56px); display: flex; flex-direction: column; }
+    .project-meta { display: flex; justify-content: space-between; color: var(--amber); font-size: 12px; }
+    .project-card h3 { margin: 25px 0 5px; font: 600 clamp(35px, 7vw, 75px)/1 var(--heading); letter-spacing: -.06em; }
+    .project-tag { color: var(--dim); }
+    .pills, .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pills { margin: 28px 0; }
+    .pill, .skill { border: 1px solid var(--line); color: var(--dim); padding: 4px 10px; font-size: 11px; }
+    .project-card p { max-width: 720px; color: var(--dim); margin: auto 0 23px; }
+    .project-links { display: flex; gap: 22px; color: var(--blue); font-size: 12px; }
+    .carousel-controls { display: flex; align-items: center; justify-content: space-between; margin-top: 19px; }
+    .arrows { display: flex; gap: 9px; }
+    .arrow { width: 39px; height: 39px; border: 1px solid var(--line); background: transparent; cursor: pointer; transition: border-color .2s, color .2s; }
+    .arrow:hover { border-color: var(--amber); color: var(--amber); }
+    .dots { display: flex; gap: 8px; }
+    .dot { position: relative; width: 42px; height: 3px; overflow: hidden; background: var(--line); cursor: pointer; }
+    .dot::after { content: ""; position: absolute; inset: 0; transform: scaleX(0); transform-origin: left; background: var(--blue); }
+    .dot.active::after { animation: fill 6s linear forwards; }
+    .counter { color: var(--dim); font-size: 12px; }
+    .timeline { position: relative; max-width: 780px; padding-left: 32px; }
+    .timeline::before { content: ""; position: absolute; left: 5px; top: 9px; bottom: 10px; width: 1px; background: var(--line); }
+    .timeline-entry { position: relative; padding: 0 0 43px; }
+    .timeline-entry::before { content: ""; position: absolute; left: -32px; top: 8px; width: 9px; height: 9px; border: 2px solid var(--amber); border-radius: 50%; background: var(--bg); }
+    .timeline-entry time { color: var(--amber); font-size: 11px; }
+    .timeline-entry h3 { margin: 6px 0 4px; font: 600 22px var(--heading); }
+    .timeline-entry p { margin: 0; color: var(--dim); }
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+    .skills-grid h3 { color: var(--dim); font-size: 12px; font-weight: 400; margin: 0 0 19px; }
+    .skill { opacity: 0; transform: scale(.88); transition: opacity .5s, transform .5s, color .2s, border-color .2s, box-shadow .2s; }
+    .visible .skill { opacity: 1; transform: none; transition-delay: calc(var(--i) * 55ms); }
+    .skill:hover { color: var(--text); border-color: var(--blue); box-shadow: 0 0 17px rgba(106,141,255,.2); transform: translateY(-3px); }
+    .contact { display: grid; grid-template-columns: 1.2fr .8fr; align-items: end; gap: 50px; }
+    .contact h2 { margin: 0; font: 600 clamp(38px, 7vw, 78px)/.97 var(--heading); letter-spacing: -.07em; }
+    .contact h2 em { color: var(--blue); font-style: normal; }
+    .availability { display: flex; align-items: center; gap: 9px; margin-top: 25px; color: var(--dim); font-size: 12px; }
+    .pulse { width: 8px; height: 8px; border-radius: 50%; background: #6affba; box-shadow: 0 0 0 0 rgba(106,255,186,.5); animation: pulse 2s infinite; }
+    .contact-links { display: grid; gap: 13px; justify-items: start; }
+    .contact-links a { position: relative; color: var(--dim); }
+    .contact-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 1px; height: 1px; background: var(--amber); transform: scaleX(0); transform-origin: right; transition: transform .3s; }
+    .contact-links a:hover { color: var(--text); } .contact-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+    footer { padding: 25px 0 35px; border-top: 1px solid var(--line); color: var(--dim); font-size: 11px; }
+    :focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; }
+    #cursor-dot, #cursor-ring { display: none; position: fixed; z-index: 40; pointer-events: none; border-radius: 50%; transform: translate(-50%, -50%); }
+    #cursor-dot { width: 7px; height: 7px; background: var(--amber); }
+    #cursor-ring { width: 32px; height: 32px; border: 1px solid var(--blue); transition: width .25s, height .25s, border-color .25s; }
+    body.cursor-hover #cursor-ring { width: 48px; height: 48px; border-color: var(--amber); }
+    @keyframes rise { to { transform: translateY(0); } } @keyframes up { to { opacity: 1; transform: none; } }
+    @keyframes blink { 50% { opacity: 0; } } @keyframes fill { to { transform: scaleX(1); } }
+    @keyframes pulse { 70% { box-shadow: 0 0 0 7px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+    @media (pointer: fine) { body { cursor: none; } a, button { cursor: none; } #cursor-dot, #cursor-ring { display: block; } }
+    @media (max-width: 700px) {
+      main, footer { width: min(100% - 32px, var(--max)); } .editor-header { padding: 0 16px; }
+      .tab { padding: 0 14px; font-size: 11px; } .tab:first-child { padding-left: 0; }
+      .hero { min-height: 850px; padding-top: 120px; } .hero h1 { font-size: clamp(3.8rem, 18vw, 7rem); }
+      .stats { grid-template-columns: repeat(2, 1fr); gap: 20px 0; } .stat:nth-child(2) { border: 0; }
+      .stat:nth-child(3) { padding-left: 0; } .stat:nth-child(4) { padding-left: 22px; }
+      section { padding: 80px 0; } .about-grid, .skills-grid, .contact { grid-template-columns: 1fr; gap: 32px; }
+      .terminal-body { padding: 21px; } .project-card { min-height: 540px; padding: 28px 22px; }
+      .carousel-controls { flex-wrap: wrap; gap: 18px; } .dots { order: 3; width: 100%; }
+      .contact-links { justify-items: start; } .contact h2 { font-size: clamp(40px, 13vw, 70px); }
+    }
+    @media (max-width: 400px) { body { font-size: 13px; } .data-row { grid-template-columns: 92px 1fr; gap: 8px; } .hero h1 { font-size: 3.7rem; } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      .preloader { display: none; } .hero h1 b, .hero-intro, .hero-bottom { opacity: 1; transform: none; }
+      .reveal, .skill { opacity: 1; transform: none; } #network, #cursor-dot, #cursor-ring { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div id="progress"></div><canvas id="network"></canvas><div class="noise"></div>
+  <div class="preloader" id="preloader"><div class="boot" aria-live="polite">
+    <div class="boot-line" data-text="$ initializing portfolio..."></div>
+    <div class="boot-line" data-text="$ loading fonts... [ok]"></div>
+    <div class="boot-line" data-text="$ whoami"></div>
+    <div class="boot-line" data-text="shabd_srivastava — ml_engineer && full_stack_dev"></div><span class="cursor-char"></span>
+  </div></div>
+  <div id="cursor-dot"></div><div id="cursor-ring"></div>
+  <header class="editor-header"><nav class="tabs" aria-label="Primary navigation">
+    <a class="tab active" href="#about"><i class="tab-dot"></i>about.tsx</a>
+    <a class="tab" href="#projects"><i class="tab-dot"></i>projects.tsx</a>
+    <a class="tab" href="#history"><i class="tab-dot"></i>history.log</a>
+    <a class="tab" href="#skills"><i class="tab-dot"></i>skills.json</a>
+    <a class="tab" href="#contact"><i class="tab-dot"></i>contact.md</a><span class="tab-indicator"></span>
+  </nav></header>
+  <main>
+    <section class="hero" id="top">
+      <div class="eyebrow">Machine learning engineer & full stack developer</div>
+      <h1><span><b>Shabd</b></span><span><b>Srivastava</b></span></h1>
+      <p class="hero-intro">I build reliable AI-powered applications and production-ready web platforms<span class="type-cursor"></span></p>
+      <div class="hero-bottom"><div class="stats">
+        <div class="stat"><strong>92%</strong><small>ROC-AUC / DiseaseDetect</small></div><div class="stat"><strong>500+</strong><small>concurrent users served</small></div>
+        <div class="stat"><strong>47</strong><small>tests shipped with Shawty</small></div><div class="stat"><strong>∞</strong><small>things left to build</small></div>
+      </div><div class="actions"><a class="button primary" href="#contact">Get in touch <span>&nbsp;↗</span></a><a class="button" href="#projects">View projects <span>&nbsp;↓</span></a></div></div>
+    </section>
+    <section id="about" class="reveal"><div class="section-heading"><h2>About</h2><small>01 / 05</small></div><div class="about-grid">
+      <div class="terminal-card"><div class="terminal-top"><i class="traffic"></i><i class="traffic"></i><i class="traffic"></i></div><div class="terminal-body">
+        <p><span class="prompt">$ </span>I'm <strong>Shabd Srivastava</strong>, an Information Technology student at <strong>IIEST Shibpur</strong>. I build things end-to-end — architecture through deployment — and care about how they hold up under real load.</p>
+        <p><span class="prompt">$ </span>My work spans full-stack development and machine learning: React, Next.js, TypeScript, Node.js on one side, Python, TensorFlow, and Keras on the other.</p>
+        <p><span class="prompt">$ </span>I build from genuine curiosity: a document tool that reasons, a diagnostic model that explains itself, and a fest website that stayed up when 500+ people hit it at once.</p>
+      </div></div>
+      <dl class="data-table"><div class="data-row"><dt>role</dt><dd>ML Engineer / Full Stack Dev</dd></div><div class="data-row"><dt>status</dt><dd class="status">● available for opportunities</dd></div><div class="data-row"><dt>based in</dt><dd>India</dd></div><div class="data-row"><dt>focus</dt><dd>AI systems + web platforms</dd></div><div class="data-row"><dt>education</dt><dd>IIEST Shibpur · IT</dd></div></dl>
+    </div></section>
+    <section id="projects" class="reveal"><div class="section-heading"><h2>Selected projects</h2><small>02 / 05</small></div><div class="carousel-wrap" id="carousel"><div class="project-card">
+      <div class="project-meta"><span id="project-index">01 / 03</span><span id="project-type">system design</span></div><h3 id="project-name">Shawty</h3><div class="project-tag" id="project-tag">URL shortener built for real traffic</div><div class="pills" id="project-pills"></div><p id="project-description"></p><div class="project-links" id="project-links"></div>
+    </div><div class="carousel-controls"><div class="arrows"><button class="arrow" id="prev" aria-label="Previous project">←</button><button class="arrow" id="next" aria-label="Next project">→</button></div><div class="dots" id="dots"></div><span class="counter" id="counter">01 / 03</span></div></div></section>
+    <section id="history" class="reveal"><div class="section-heading"><h2>History.log</h2><small>03 / 05</small></div><div class="timeline">
+      <article class="timeline-entry"><time>2024 — PRESENT</time><h3>Information Technology · IIEST Shibpur</h3><p>Building a strong foundation across systems, software engineering, and applied machine learning.</p></article>
+      <article class="timeline-entry"><time>2024 — PRESENT</time><h3>Web Development Associate · Rebeca, Annual Fest</h3><p>Shipped and maintained a high-traffic fest platform used by 500+ concurrent visitors.</p></article>
+      <article class="timeline-entry"><time>2023 — 2024</time><h3>Independent builder · AI & full stack</h3><p>Created production-minded projects spanning document intelligence, healthcare ML, and distributed web services.</p></article>
+    </div></section>
+    <section id="skills" class="reveal"><div class="section-heading"><h2>Skills</h2><small>04 / 05</small></div><div class="skills-grid">
+      <div><h3>// languages & tools</h3><div class="tag-list"><span class="skill" style="--i:1">Python</span><span class="skill" style="--i:2">TypeScript</span><span class="skill" style="--i:3">JavaScript</span><span class="skill" style="--i:4">React</span><span class="skill" style="--i:5">Next.js</span><span class="skill" style="--i:6">Node.js</span><span class="skill" style="--i:7">PostgreSQL</span><span class="skill" style="--i:8">Redis</span><span class="skill" style="--i:9">Docker</span><span class="skill" style="--i:10">Git</span><span class="skill" style="--i:11">TensorFlow</span><span class="skill" style="--i:12">Keras</span></div></div>
+      <div><h3>// domains</h3><div class="tag-list"><span class="skill" style="--i:1">Machine Learning</span><span class="skill" style="--i:2">Deep Learning</span><span class="skill" style="--i:3">REST APIs</span><span class="skill" style="--i:4">System Design</span><span class="skill" style="--i:5">Computer Vision</span><span class="skill" style="--i:6">LLM Applications</span><span class="skill" style="--i:7">Cloud Deployment</span><span class="skill" style="--i:8">Observability</span></div></div>
+    </div></section>
+    <section id="contact" class="reveal"><div class="section-heading"><h2>Contact</h2><small>05 / 05</small></div><div class="contact"><div><h2>Let's build<br><em>something useful.</em></h2><div class="availability"><i class="pulse"></i> Open to internships & early-stage roles</div></div><div class="contact-links"><span>phone — available on request</span><span>email — available on request</span><a href="https://github.com/Shades19-afk" target="_blank" rel="noreferrer">github.com/Shades19-afk ↗</a><a href="https://www.linkedin.com/in/shabd-srivastava-88904129a/" target="_blank" rel="noreferrer">linkedin.com/in/shabd-srivastava ↗</a></div></div></section>
+  </main>
+  <footer>© 2026 Shabd Srivastava <span>— built with curiosity & caffeine</span></footer>
+  <script>
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const qs = (s, el = document) => el.querySelector(s), qsa = (s, el = document) => [...el.querySelectorAll(s)];
+    const progress = qs("#progress");
+    addEventListener("scroll", () => { const max = document.documentElement.scrollHeight - innerHeight; progress.style.width = `${max ? scrollY / max * 100 : 0}%`; }, {passive:true});
+    const tabs = qsa(".tab"), indicator = qs(".tab-indicator"), sections = tabs.map(t => qs(t.getAttribute("href")));
+    function setTab(i) { const tab = tabs[i]; indicator.style.left = `${tab.offsetLeft}px`; indicator.style.width = `${tab.offsetWidth}px`; tabs.forEach((t, n) => t.classList.toggle("active", n === i)); }
+    setTab(0); addEventListener("resize", () => setTab(Math.max(0, sections.findIndex(s => s.getBoundingClientRect().top > 100) - 1)));
+    const tabObserver = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) setTab(sections.indexOf(entry.target)); }), {rootMargin:"-35% 0px -55% 0px"});
+    sections.forEach(s => tabObserver.observe(s));
+    const revealObserver = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add("visible"); revealObserver.unobserve(e.target); } }), {threshold:.15});
+    qsa(".reveal").forEach(e => revealObserver.observe(e));
+    const preloader = qs("#preloader");
+    if (!reduce) {
+      const lines = qsa(".boot-line"); let line = 0, char = 0;
+      function type() { if (line >= lines.length) { setTimeout(() => preloader.classList.add("done"), 500); return; } const text = lines[line].dataset.text; lines[line].textContent = text.slice(0, ++char); if (char < text.length) setTimeout(type, 24); else { line++; char = 0; setTimeout(type, 170); } }
+      type();
+    } else preloader.classList.add("done");
+    const projects = [
+      {name:"Shawty", type:"system design", tag:"URL shortener built for real traffic", tech:["TypeScript","PostgreSQL","Redis","Docker"], desc:"Redis-backed caching, rate limiting, async click logging, race-safe custom codes, and a fail-open Postgres path. Runs as three replicas behind nginx with 34 unit tests and 13 integration tests.", links:[["View on GitHub","https://github.com/Shades19-afk/Shawty"]]},
+      {name:"DocuMind", type:"AI document intelligence", tag:"A study tool that actually reasons", tech:["Next.js","TypeScript","Supabase","OpenRouter"], desc:"A full-stack platform where users upload PDFs and receive LLM-generated summaries, flashcards, and study notes, with typed failure states, retries, row-level security, and resilient persistence.", links:[["View website","https://documind-oam2.vercel.app/"],["View on GitHub","https://github.com/Shades19-afk/documind"]]},
+      {name:"DiseaseDetect", type:"explainable ML", tag:"Medical imaging with a reason behind the prediction", tech:["TensorFlow","Python","DenseNet121","Grad-CAM"], desc:"Compared three image classifiers for pneumonia detection, reaching 92% ROC-AUC with DenseNet121. Includes Grad-CAM explanations, reproducible evaluation, and a deployed Streamlit app.", links:[["View website","https://huggingface.co/spaces/Shades19/disease-detect"],["View on GitHub","https://github.com/Shades19-afk/DiseaseDetection"]]}
+    ];
+    let current = 0, timer;
+    const name = qs("#project-name"), type = qs("#project-type"), tag = qs("#project-tag"), desc = qs("#project-description"), pills = qs("#project-pills"), links = qs("#project-links"), index = qs("#project-index"), counter = qs("#counter"), dots = qs("#dots");
+    projects.forEach((_, i) => { const d = document.createElement("button"); d.className = "dot"; d.setAttribute("aria-label", `Go to project ${i+1}`); d.onclick = () => show(i); dots.append(d); });
+    function show(i, restart = true) { current = (i + projects.length) % projects.length; const p = projects[current]; index.textContent = counter.textContent = `0${current+1} / 03`; name.textContent = p.name; type.textContent = p.type; tag.textContent = p.tag; desc.textContent = p.desc; pills.innerHTML = p.tech.map(t => `<span class="pill">${t}</span>`).join(""); links.innerHTML = p.links.map(l => `<a href="${l[1]}" target="_blank" rel="noreferrer">${l[0]} ↗</a>`).join(""); qsa(".dot").forEach((d,n) => d.classList.toggle("active", n === current)); if (restart && !reduce) { clearInterval(timer); timer = setInterval(() => show(current + 1), 6000); } }
+    qs("#prev").onclick = () => show(current - 1); qs("#next").onclick = () => show(current + 1); show(0);
+    const carousel = qs("#carousel"); carousel.onmouseenter = () => clearInterval(timer); carousel.onmouseleave = () => { if(!reduce) timer = setInterval(() => show(current + 1), 6000); };
+    let touchStart = 0; carousel.addEventListener("touchstart", e => touchStart = e.changedTouches[0].screenX, {passive:true}); carousel.addEventListener("touchend", e => { const delta = e.changedTouches[0].screenX - touchStart; if(Math.abs(delta) > 45) show(current + (delta < 0 ? 1 : -1)); }, {passive:true});
+    if (!reduce) {
+      const canvas = qs("#network"), ctx = canvas.getContext("2d"); let nodes = [], mouse = {x:-1000,y:-1000};
+      function resize() { canvas.width = innerWidth; canvas.height = innerHeight; nodes = Array.from({length:60}, () => ({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18})); }
+      function draw() { ctx.clearRect(0,0,canvas.width,canvas.height); nodes.forEach(n => { n.x = (n.x+n.vx+canvas.width)%canvas.width; n.y = (n.y+n.vy+canvas.height)%canvas.height; }); nodes.forEach((a,i) => { const near = Math.hypot(a.x-mouse.x,a.y-mouse.y) < 110; ctx.beginPath(); ctx.arc(a.x,a.y,near?2.8:1.5,0,Math.PI*2); ctx.fillStyle = near ? "#ffb020" : "#6a8dff"; ctx.fill(); nodes.slice(i+1).forEach(b => { const d=Math.hypot(a.x-b.x,a.y-b.y); if(d<150){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=`rgba(106,141,255,${(1-d/150)*.18})`;ctx.stroke();} }); }); requestAnimationFrame(draw); }
+      resize(); addEventListener("resize", resize); addEventListener("mousemove", e => {mouse.x=e.clientX;mouse.y=e.clientY;}); draw();
+    }
+    if (matchMedia("(pointer: fine)").matches) { const dot=qs("#cursor-dot"), ring=qs("#cursor-ring"); let x=0,y=0,rx=0,ry=0; addEventListener("mousemove", e => {x=e.clientX;y=e.clientY;dot.style.left=`${x}px`;dot.style.top=`${y}px`;}); function trail(){rx+=(x-rx)*.16;ry+=(y-ry)*.16;ring.style.left=`${rx}px`;ring.style.top=`${ry}px`;requestAnimationFrame(trail);} trail(); qsa("a,button,.skill").forEach(e=>{e.onmouseenter=()=>document.body.classList.add("cursor-hover");e.onmouseleave=()=>document.body.classList.remove("cursor-hover");}); }
+  </script>
+</body>
 </html>
