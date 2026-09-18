@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0a0b10; --card: #12141d; --card-2: #171a25; --text: #eae8e1;
+      --bg: #0a0b10; --bg-soft: #10121a; --card: #12141d; --card-2: #171a25; --text: #eae8e1;
       --dim: #8d8f9c; --blue: #6a8dff; --amber: #ffb020; --line: #252938;
       --heading: "Space Grotesk", sans-serif; --mono: "JetBrains Mono", monospace;
       --max: 1160px;
@@ -41,16 +41,23 @@
     .tab:nth-child(3) .tab-dot { background: #b06aff; }
     .tab:nth-child(5) .tab-dot { background: #6affba; }
     .tab-indicator { position: absolute; bottom: -1px; height: 2px; background: var(--blue); transition: left .35s ease, width .35s ease; }
+    .palette-trigger { margin: 0 0 10px auto; padding: 5px 10px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--dim); font-size: 11px; white-space: nowrap; }
+    .palette-trigger:hover { color: var(--text); border-color: var(--blue); }
     main, footer { width: min(var(--max), calc(100% - 48px)); margin-inline: auto; }
     .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 0 70px; }
+    .hero.hero-sequence-pending .eyebrow, .hero.hero-sequence-pending h1 b, .hero.hero-sequence-pending .hero-intro, .hero.hero-sequence-pending .hero-bottom { opacity: 0; animation: none; transform: none; }
+    .hero.hero-sequence-pending .hero-intro { visibility: hidden; }
     .eyebrow, .section-kicker { color: var(--amber); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
     .hero h1 { max-width: 850px; margin: 18px 0 22px; font: 700 clamp(4rem, 12vw, 9.5rem)/.88 var(--heading); letter-spacing: -.075em; }
     .hero h1 span { display: block; overflow: hidden; }
     .hero h1 b { display: block; transform: translateY(110%); animation: rise .9s cubic-bezier(.2,.8,.2,1) forwards; }
     .hero h1 span:nth-child(2) b { color: var(--blue); animation-delay: .12s; }
     .hero-intro { max-width: 670px; color: var(--dim); font-size: 15px; opacity: 0; animation: up .7s .5s forwards; }
-    .type-cursor { display: inline-block; width: 8px; height: 1.1em; margin-left: 5px; vertical-align: -.2em; background: var(--amber); animation: blink 1s steps(1) infinite; }
+    .type-cursor { display: inline-block; width: 8px; height: 1.1em; margin-left: 5px; vertical-align: -.2em; background: var(--amber); animation: blink 1s steps(1) infinite; animation-play-state: paused; }
+    .hero.role-ready .type-cursor { animation-play-state: running; }
     .hero-bottom { margin-top: 58px; opacity: 0; animation: up .7s .7s forwards; }
+    .hero.hero-sequence-pending .stat, .hero.hero-sequence-pending .actions .button { opacity: 0; transform: scale(.92); }
+    .hero .stat.hero-sequence-visible, .hero .actions .button.hero-sequence-visible { opacity: 1; transform: none; transition: opacity .45s ease, transform .45s ease; }
     .stats { display: grid; grid-template-columns: repeat(4, minmax(90px, 1fr)); max-width: 610px; margin-bottom: 34px; }
     .stat { padding-right: 22px; border-right: 1px solid var(--line); }
     .stat:not(:first-child) { padding-left: 22px; }
@@ -78,12 +85,25 @@
     .terminal-body p::first-letter { color: var(--amber); }
     .prompt { color: var(--amber); }
     .terminal-body strong { color: var(--text); font-weight: 500; }
+    .interactive-terminal { margin-top: 22px; background: rgba(18,20,29,.83); border: 1px solid var(--line); }
+    .interactive-output { max-height: 185px; overflow-y: auto; padding: 18px 22px 4px; color: var(--dim); }
+    .interactive-line { margin: 0 0 8px; white-space: pre-wrap; }
+    .interactive-line.command { color: var(--text); }
+    .interactive-line.command::before { content: "$ "; color: var(--amber); }
+    .interactive-line.response { color: var(--dim); }
+    .interactive-form { display: flex; align-items: center; min-height: 52px; padding: 0 22px; border-top: 1px solid var(--line); background: var(--bg-soft); position: relative; z-index: 1; }
+    .interactive-prompt { flex: 0 0 auto; color: var(--amber); margin-right: 8px; animation: blink 1s steps(1) infinite; }
+    .interactive-input { display: block; min-width: 0; flex: 1; height: 44px; padding: 0; border: 0; outline: 0; background: transparent; color: var(--text); caret-color: var(--amber); font: 13px var(--mono); }
     .data-table { border-top: 1px solid var(--line); }
     .data-row { display: grid; grid-template-columns: 110px 1fr; gap: 18px; padding: 15px 0; border-bottom: 1px solid var(--line); }
     .data-row dt { color: var(--dim); } .data-row dd { margin: 0; color: var(--text); }
     .status { color: #6affba !important; }
     .carousel-wrap { position: relative; }
-    .project-card { min-height: 470px; padding: clamp(25px, 5vw, 56px); display: flex; flex-direction: column; }
+    .project-card { position: relative; min-height: 470px; padding: clamp(25px, 5vw, 56px); display: flex; flex-direction: column; transform-style: preserve-3d; transition: transform .2s ease, box-shadow .3s ease; }
+    .project-card::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0; background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,86,35,.45), transparent 48%); mix-blend-mode: screen; transition: opacity .3s; }
+    .project-card > * { position: relative; z-index: 1; }
+    .project-card:hover::after { opacity: 1; }
+    .project-card.plain-hover:hover { transform: translateY(-4px); box-shadow: 0 14px 35px rgba(0,0,0,.22); }
     .project-meta { display: flex; justify-content: space-between; color: var(--amber); font-size: 12px; }
     .project-card h3 { margin: 25px 0 5px; font: 600 clamp(35px, 7vw, 75px)/1 var(--heading); letter-spacing: -.06em; }
     .project-tag { color: var(--dim); }
@@ -99,7 +119,7 @@
     .dots { display: flex; gap: 8px; }
     .dot { position: relative; width: 42px; height: 3px; overflow: hidden; background: var(--line); cursor: pointer; }
     .dot::after { content: ""; position: absolute; inset: 0; transform: scaleX(0); transform-origin: left; background: var(--blue); }
-    .dot.active::after { animation: fill 6s linear forwards; }
+    .dot.active::after { animation: fill var(--autoplay-ms, 7000ms) linear forwards; }
     .counter { color: var(--dim); font-size: 12px; }
     .timeline { position: relative; max-width: 780px; padding-left: 32px; }
     .timeline::before { content: ""; position: absolute; left: 5px; top: 9px; bottom: 10px; width: 1px; background: var(--line); }
@@ -122,6 +142,13 @@
     .contact-links a { position: relative; color: var(--dim); }
     .contact-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 1px; height: 1px; background: var(--amber); transform: scaleX(0); transform-origin: right; transition: transform .3s; }
     .contact-links a:hover { color: var(--text); } .contact-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+    .palette-backdrop { position: fixed; inset: 0; z-index: 25; display: grid; place-items: start center; padding: 14vh 20px 20px; background: rgba(5,6,10,.7); backdrop-filter: blur(8px); opacity: 0; visibility: hidden; transition: opacity .2s, visibility .2s; }
+    .palette-backdrop.open { opacity: 1; visibility: visible; }
+    .palette { width: min(560px, 100%); overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: var(--card); box-shadow: 0 24px 80px rgba(0,0,0,.5); }
+    .palette-search { width: 100%; padding: 18px 20px; border: 0; border-bottom: 1px solid var(--line); outline: 0; background: transparent; color: var(--text); font: 14px var(--mono); }
+    .palette-items { max-height: 330px; overflow-y: auto; padding: 8px; }
+    .palette-item { display: block; width: 100%; padding: 11px 13px; border: 0; border-radius: 6px; background: transparent; color: var(--dim); text-align: left; cursor: pointer; }
+    .palette-item:hover, .palette-item:focus-visible { background: var(--card-2); color: var(--text); outline: 0; }
     footer { padding: 25px 0 35px; border-top: 1px solid var(--line); color: var(--dim); font-size: 11px; }
     :focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; }
     #cursor-dot, #cursor-ring { display: none; position: fixed; z-index: 40; pointer-events: none; border-radius: 50%; transform: translate(-50%, -50%); }
@@ -133,7 +160,7 @@
     @keyframes pulse { 70% { box-shadow: 0 0 0 7px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
     @media (pointer: fine) { body { cursor: none; } a, button { cursor: none; } #cursor-dot, #cursor-ring { display: block; } }
     @media (max-width: 700px) {
-      main, footer { width: min(100% - 32px, var(--max)); } .editor-header { padding: 0 16px; }
+      main, footer { width: min(100% - 32px, var(--max)); } .editor-header { padding: 0 16px; } .palette-trigger { margin-left: 12px; }
       .tab { padding: 0 14px; font-size: 11px; } .tab:first-child { padding-left: 0; }
       .hero { min-height: 850px; padding-top: 120px; } .hero h1 { font-size: clamp(3.8rem, 18vw, 7rem); }
       .stats { grid-template-columns: repeat(2, 1fr); gap: 20px 0; } .stat:nth-child(2) { border: 0; }
@@ -146,8 +173,9 @@
     @media (max-width: 400px) { body { font-size: 13px; } .data-row { grid-template-columns: 92px 1fr; gap: 8px; } .hero h1 { font-size: 3.7rem; } }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
-      .preloader { display: none; } .hero h1 b, .hero-intro, .hero-bottom { opacity: 1; transform: none; }
-      .reveal, .skill { opacity: 1; transform: none; } #network, #cursor-dot, #cursor-ring { display: none; }
+      .preloader { display: none; } .hero h1 b, .hero-intro, .hero-bottom, .hero.hero-sequence-pending .eyebrow, .hero.hero-sequence-pending h1 b, .hero.hero-sequence-pending .hero-intro, .hero.hero-sequence-pending .hero-bottom { opacity: 1; visibility: visible; transform: none; animation: none; }
+      .hero.hero-sequence-pending .stat, .hero.hero-sequence-pending .actions .button { opacity: 1; transform: none; }
+      .reveal, .skill { opacity: 1; transform: none; } #network, #cursor-dot, #cursor-ring { display: none; } .palette-trigger { display: none; }
     }
   </style>
 </head>
@@ -165,39 +193,43 @@
     <a class="tab" href="#projects"><i class="tab-dot"></i>projects.tsx</a>
     <a class="tab" href="#history"><i class="tab-dot"></i>history.log</a>
     <a class="tab" href="#skills"><i class="tab-dot"></i>skills.json</a>
-    <a class="tab" href="#contact"><i class="tab-dot"></i>contact.md</a><span class="tab-indicator"></span>
+    <a class="tab" href="#contact"><i class="tab-dot"></i>contact.md</a><button class="palette-trigger" id="palette-trigger" type="button">Search ⌘K</button><span class="tab-indicator"></span>
   </nav></header>
   <main>
-    <section class="hero" id="top">
-      <div class="eyebrow">Machine learning engineer & full stack developer</div>
-      <h1><span><b>Shabd</b></span><span><b>Srivastava</b></span></h1>
-      <p class="hero-intro">I build things end-to-end, from model to deployment.<span class="type-cursor"></span></p>
+    <section class="hero hero-sequence-pending" id="top">
+      <div class="eyebrow" id="hero-kicker">Machine learning engineer & full stack developer</div>
+      <h1 class="name"><span><b>Shabd</b></span><span><b>Srivastava</b></span></h1>
+      <p class="hero-intro"><span id="hero-role">I build things end-to-end, from model to deployment.</span><span class="type-cursor"></span></p>
       <div class="hero-bottom"><div class="stats">
         <div class="stat"><strong>92%</strong><small>ROC-AUC / DiseaseDetect</small></div><div class="stat"><strong>500+</strong><small>concurrent users served</small></div>
         <div class="stat"><strong>47</strong><small>tests shipped with Shawty</small></div><div class="stat"><strong>∞</strong><small>things left to build</small></div>
-      </div><div class="actions"><a class="button primary" href="#contact">Get in touch <span>&nbsp;↗</span></a><a class="button" href="#projects">View projects <span>&nbsp;↓</span></a></div></div>
+      </div><div class="actions"><a class="button primary" href="#contact">Get in touch <span>&nbsp;↗</span></a><a class="button" href="#projects">View projects <span>&nbsp;↓</span></a><a class="button" href="Shabd_Srivastava_Resume.pdf" download>Download Résumé</a></div></div>
     </section>
-    <section id="about" class="reveal"><div class="section-heading"><h2>About</h2><small>01 / 05</small></div><div class="about-grid">
+    <section id="about" class="reveal"><div class="section-heading"><h2 class="sec-title">About</h2><small>01 / 05</small></div><div class="about-grid">
       <div class="terminal-card"><div class="terminal-top"><i class="traffic"></i><i class="traffic"></i><i class="traffic"></i></div><div class="terminal-body">
         <p><span class="prompt">$ </span>I'm <strong>Shabd Srivastava</strong>, an IT student at <strong>IIEST Shibpur</strong>.</p>
         <p><span class="prompt">$ </span>I build things end-to-end, from architecture to deployment, and follow projects that come from genuine curiosity — not resume-padding.</p>
+        <p><span class="prompt">$ </span>I care more about how things behave under real load than how they look in a demo.</p>
+        <p><span class="prompt">$ </span>Most of what I know, I learned by breaking something and figuring out why.</p>
       </div></div>
       <dl class="data-table"><div class="data-row"><dt>role</dt><dd>ML Engineer / Full Stack Dev</dd></div><div class="data-row"><dt>status</dt><dd class="status">● available for opportunities</dd></div><div class="data-row"><dt>based in</dt><dd>India</dd></div><div class="data-row"><dt>focus</dt><dd>AI systems + web platforms</dd></div><div class="data-row"><dt>education</dt><dd>IIEST Shibpur · IT</dd></div></dl>
+      <div class="interactive-terminal"><div class="terminal-top"><i class="traffic"></i><i class="traffic"></i><i class="traffic"></i></div><div class="interactive-output" id="terminal-output"><p class="interactive-line response">Type <strong>help</strong> to see available commands.</p></div><form class="interactive-form" id="terminal-form"><span class="interactive-prompt">$</span><input class="interactive-input" id="terminal-input" aria-label="Terminal command" autocomplete="off" spellcheck="false"></form></div>
     </div></section>
-    <section id="projects" class="reveal"><div class="section-heading"><h2>Selected projects</h2><small>02 / 05</small></div><div class="carousel-wrap" id="carousel"><div class="project-card">
+    <section id="projects" class="reveal"><div class="section-heading"><h2 class="sec-title">Selected projects</h2><small>02 / 05</small></div><div class="carousel-wrap" id="carousel"><div class="project-card">
       <div class="project-meta"><span id="project-index">01 / 03</span><span id="project-type">system design</span></div><h3 id="project-name">Shawty</h3><div class="project-tag" id="project-tag">URL shortener built for real traffic</div><div class="pills" id="project-pills"></div><p id="project-description"></p><div class="project-links" id="project-links"></div>
     </div><div class="carousel-controls"><div class="arrows"><button class="arrow" id="prev" aria-label="Previous project">←</button><button class="arrow" id="next" aria-label="Next project">→</button></div><div class="dots" id="dots"></div><span class="counter" id="counter">01 / 03</span></div></div></section>
-    <section id="history" class="reveal"><div class="section-heading"><h2>History.log</h2><small>03 / 05</small></div><div class="timeline">
+    <section id="history" class="reveal"><div class="section-heading"><h2 class="sec-title">History.log</h2><small>03 / 05</small></div><div class="timeline">
       <article class="timeline-entry"><time>2024 — PRESENT</time><h3>Information Technology · IIEST Shibpur</h3><p>Building a strong foundation across systems, software engineering, and applied machine learning.</p></article>
       <article class="timeline-entry"><time>2024 — PRESENT</time><h3>Web Development Associate · Rebeca, Annual Fest</h3><p>Shipped and maintained a high-traffic fest platform used by 500+ concurrent visitors.</p></article>
       <article class="timeline-entry"><time>2023 — 2024</time><h3>Independent builder · AI & full stack</h3><p>Created production-minded projects spanning document intelligence, healthcare ML, and distributed web services.</p></article>
     </div></section>
-    <section id="skills" class="reveal"><div class="section-heading"><h2>Skills</h2><small>04 / 05</small></div><div class="skills-grid">
+    <section id="skills" class="reveal"><div class="section-heading"><h2 class="sec-title">Skills</h2><small>04 / 05</small></div><div class="skills-grid">
       <div><h3>// languages & tools</h3><div class="tag-list"><span class="skill" style="--i:1">Python</span><span class="skill" style="--i:2">TypeScript</span><span class="skill" style="--i:3">JavaScript</span><span class="skill" style="--i:4">React</span><span class="skill" style="--i:5">Next.js</span><span class="skill" style="--i:6">Node.js</span><span class="skill" style="--i:7">PostgreSQL</span><span class="skill" style="--i:8">Redis</span><span class="skill" style="--i:9">Docker</span><span class="skill" style="--i:10">Git</span><span class="skill" style="--i:11">TensorFlow</span><span class="skill" style="--i:12">Keras</span></div></div>
       <div><h3>// domains</h3><div class="tag-list"><span class="skill" style="--i:1">Machine Learning</span><span class="skill" style="--i:2">Deep Learning</span><span class="skill" style="--i:3">REST APIs</span><span class="skill" style="--i:4">System Design</span><span class="skill" style="--i:5">Computer Vision</span><span class="skill" style="--i:6">LLM Applications</span><span class="skill" style="--i:7">Cloud Deployment</span><span class="skill" style="--i:8">Observability</span></div></div>
     </div></section>
-    <section id="contact" class="reveal"><div class="section-heading"><h2>Contact</h2><small>05 / 05</small></div><div class="contact"><div><h2>Let's build<br><em>something useful.</em></h2><div class="availability"><i class="pulse"></i> Open to internships & early-stage roles</div></div><div class="contact-links"><a href="tel:+918736914818">+91 87369 14818 ↗</a><a href="mailto:shabdsrivastava19@gmail.com">shabdsrivastava19@gmail.com ↗</a><a href="https://github.com/Shades19-afk" target="_blank" rel="noreferrer">github.com/Shades19-afk ↗</a><a href="https://www.linkedin.com/in/shabd-srivastava-88904129a/" target="_blank" rel="noreferrer">linkedin.com/in/shabd-srivastava ↗</a></div></div></section>
+    <section id="contact" class="reveal"><div class="section-heading"><h2 class="sec-title">Contact</h2><small>05 / 05</small></div><div class="contact"><div><h2>Let's build<br><em>something useful.</em></h2><div class="availability"><i class="pulse"></i> Open to internships & early-stage roles</div></div><div class="contact-links"><a href="tel:+918736914818">+91 87369 14818 ↗</a><a href="mailto:shabdsrivastava19@gmail.com">shabdsrivastava19@gmail.com ↗</a><a href="https://github.com/Shades19-afk" target="_blank" rel="noreferrer">github.com/Shades19-afk ↗</a><a href="https://www.linkedin.com/in/shabd-srivastava-88904129a/" target="_blank" rel="noreferrer">linkedin.com/in/shabd-srivastava ↗</a></div></div></section>
   </main>
+  <div class="palette-backdrop" id="palette-backdrop" aria-hidden="true"><div class="palette" role="dialog" aria-modal="true" aria-label="Command palette"><input class="palette-search" id="palette-search" placeholder="Type a command..." autocomplete="off"><div class="palette-items" id="palette-items"></div></div></div>
   <footer>© 2026 Shabd Srivastava <span>— built with curiosity & caffeine</span></footer>
   <script>
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -211,24 +243,76 @@
     sections.forEach(s => tabObserver.observe(s));
     const revealObserver = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add("visible"); revealObserver.unobserve(e.target); } }), {threshold:.15});
     qsa(".reveal").forEach(e => revealObserver.observe(e));
-    const preloader = qs("#preloader");
+    const scrambleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    function decryptText(el, done) {
+      if (el.dataset.decrypted) { if (done) done(); return; }
+      el.dataset.decrypted = "true";
+      const target = el.textContent, frames = 24; let frame = 0;
+      const tick = () => {
+        el.textContent = [...target].map((char, i) => char === " " ? " " : i < Math.floor(target.length * frame / frames) ? target[i] : scrambleChars[Math.floor(Math.random() * scrambleChars.length)]).join("");
+        if (++frame <= frames) setTimeout(tick, 35); else { el.textContent = target; if (done) done(); }
+      };
+      tick();
+    }
+    function decryptHeading(el) { if (!reduce) decryptText(el); }
+    const headingObserver = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) { decryptHeading(e.target); headingObserver.unobserve(e.target); } }), {threshold:.35});
+    qsa(".sec-title").forEach(heading => headingObserver.observe(heading));
+    const preloader = qs("#preloader"), hero = qs(".hero"), heroKicker = qs("#hero-kicker"), heroRole = qs("#hero-role"), heroStats = qsa(".stat"), heroButtons = qsa(".actions .button");
+    function revealHeroFinal() {
+      hero.classList.remove("hero-sequence-pending");
+      hero.classList.add("role-ready");
+      heroStats.forEach((item, i) => setTimeout(() => item.classList.add("hero-sequence-visible"), i * 90));
+      heroButtons.forEach((item, i) => setTimeout(() => item.classList.add("hero-sequence-visible"), (heroStats.length + i) * 90));
+    }
+    function startHeroSequence() {
+      decryptText(heroKicker, () => {
+        const nameLines = qsa(".name b");
+        nameLines.forEach((line, i) => setTimeout(() => decryptText(line), i * 90));
+        setTimeout(() => decryptText(heroRole, () => {
+          hero.classList.add("role-ready");
+          setTimeout(revealHeroFinal, 120);
+        }), 950);
+      });
+    }
     if (!reduce) {
       const lines = qsa(".boot-line"); let line = 0, char = 0;
-      function type() { if (line >= lines.length) { setTimeout(() => preloader.classList.add("done"), 500); return; } const text = lines[line].dataset.text; lines[line].textContent = text.slice(0, ++char); if (char < text.length) setTimeout(type, 24); else { line++; char = 0; setTimeout(type, 170); } }
-      type();
-    } else preloader.classList.add("done");
+        function finishBoot() { preloader.classList.add("done"); startHeroSequence(); }
+        function type() { if (line >= lines.length) { setTimeout(finishBoot, 500); return; } const text = lines[line].dataset.text; lines[line].textContent = text.slice(0, ++char); if (char < text.length) setTimeout(type, 24); else { line++; char = 0; setTimeout(type, 170); } }
+        type();
+      } else { preloader.classList.add("done"); revealHeroFinal(); }
     const projects = [
       {name:"Shawty", type:"system design", tag:"URL shortener built for real traffic", tech:["TypeScript","PostgreSQL","Redis","Docker"], desc:"Redis-backed caching, rate limiting, async click logging, race-safe custom codes, and a fail-open Postgres path. Runs as three replicas behind nginx with 34 unit tests and 13 integration tests.", links:[["View on GitHub","https://github.com/Shades19-afk/Shawty"]]},
       {name:"DocuMind", type:"AI document intelligence", tag:"A study tool that actually reasons", tech:["Next.js","TypeScript","Supabase","OpenRouter"], desc:"A full-stack platform where users upload PDFs and receive LLM-generated summaries, flashcards, and study notes, with typed failure states, retries, row-level security, and resilient persistence.", links:[["View website","https://documind-oam2.vercel.app/"],["View on GitHub","https://github.com/Shades19-afk/documind"]]},
       {name:"DiseaseDetect", type:"explainable ML", tag:"Medical imaging with a reason behind the prediction", tech:["TensorFlow","Python","DenseNet121","Grad-CAM"], desc:"Compared three image classifiers for pneumonia detection, reaching 92% ROC-AUC with DenseNet121. Includes Grad-CAM explanations, reproducible evaluation, and a deployed Streamlit app.", links:[["View website","https://huggingface.co/spaces/Shades19/disease-detect"],["View on GitHub","https://github.com/Shades19-afk/DiseaseDetection"]]}
     ];
-    let current = 0, timer;
+    const AUTOPLAY_MS = 7000;
+    let current = 0, timer = null, carouselPaused = false;
     const name = qs("#project-name"), type = qs("#project-type"), tag = qs("#project-tag"), desc = qs("#project-description"), pills = qs("#project-pills"), links = qs("#project-links"), index = qs("#project-index"), counter = qs("#counter"), dots = qs("#dots");
     projects.forEach((_, i) => { const d = document.createElement("button"); d.className = "dot"; d.setAttribute("aria-label", `Go to project ${i+1}`); d.onclick = () => show(i); dots.append(d); });
-    function show(i, restart = true) { current = (i + projects.length) % projects.length; const p = projects[current]; index.textContent = counter.textContent = `0${current+1} / 03`; name.textContent = p.name; type.textContent = p.type; tag.textContent = p.tag; desc.textContent = p.desc; pills.innerHTML = p.tech.map(t => `<span class="pill">${t}</span>`).join(""); links.innerHTML = p.links.map(l => `<a href="${l[1]}" target="_blank" rel="noreferrer">${l[0]} ↗</a>`).join(""); qsa(".dot").forEach((d,n) => d.classList.toggle("active", n === current)); if (restart && !reduce) { clearInterval(timer); timer = setInterval(() => show(current + 1), 6000); } }
+    function scheduleAutoplay() { clearTimeout(timer); timer = null; if (!reduce && !carouselPaused) timer = setTimeout(() => show(current + 1), AUTOPLAY_MS); }
+    function resetDotProgress() { qsa(".dot").forEach((d, n) => { d.classList.remove("active"); d.style.setProperty("--autoplay-ms", `${AUTOPLAY_MS}ms`); if (n === current) { void d.offsetWidth; d.classList.add("active"); } }); }
+    function show(i) { current = (i + projects.length) % projects.length; const p = projects[current]; const card = qs(".project-card"); card.classList.toggle("disease-tilt", current === 2); card.classList.toggle("plain-hover", current !== 2); card.style.transform = ""; index.textContent = counter.textContent = `0${current+1} / 03`; name.textContent = p.name; type.textContent = p.type; tag.textContent = p.tag; desc.textContent = p.desc; pills.innerHTML = p.tech.map(t => `<span class="pill">${t}</span>`).join(""); links.innerHTML = p.links.map(l => `<a href="${l[1]}" target="_blank" rel="noreferrer">${l[0]} ↗</a>`).join(""); qsa(".dot").forEach((d,n) => d.classList.toggle("active", n === current)); resetDotProgress(); scheduleAutoplay(); }
     qs("#prev").onclick = () => show(current - 1); qs("#next").onclick = () => show(current + 1); show(0);
-    const carousel = qs("#carousel"); carousel.onmouseenter = () => clearInterval(timer); carousel.onmouseleave = () => { if(!reduce) timer = setInterval(() => show(current + 1), 6000); };
+    const carousel = qs("#carousel"); carousel.onmouseenter = () => { carouselPaused = true; clearTimeout(timer); timer = null; }; carousel.onmouseleave = () => { carouselPaused = false; scheduleAutoplay(); };
     let touchStart = 0; carousel.addEventListener("touchstart", e => touchStart = e.changedTouches[0].screenX, {passive:true}); carousel.addEventListener("touchend", e => { const delta = e.changedTouches[0].screenX - touchStart; if(Math.abs(delta) > 45) show(current + (delta < 0 ? 1 : -1)); }, {passive:true});
+    if (!reduce && matchMedia("(pointer: fine)").matches) {
+      qsa(".button, .arrow").forEach(button => {
+        button.addEventListener("mousemove", e => { const r = button.getBoundingClientRect(); button.style.transform = `translate(${(e.clientX - (r.left + r.width / 2)) * .3}px, ${(e.clientY - (r.top + r.height / 2)) * .3}px)`; });
+        button.addEventListener("mouseleave", () => button.style.transform = "");
+      });
+      const card = qs(".project-card");
+      card.addEventListener("mousemove", e => { const r = card.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height; card.style.setProperty("--mx", `${x * 100}%`); card.style.setProperty("--my", `${y * 100}%`); card.style.transform = `perspective(900px) rotateX(${(0.5 - y) * 28}deg) rotateY(${(x - 0.5) * 28}deg)`; });
+      card.addEventListener("mouseleave", () => card.style.transform = "");
+    }
+    const commandResponses = { help: "help · whoami · projects · skills · contact · sudo hire me", whoami: "Shabd Srivastava — ML engineer & full stack developer", projects: "Shawty · DocuMind · DiseaseDetect", skills: "Python · TypeScript · React · TensorFlow · PostgreSQL", contact: "shabdsrivastava19@gmail.com · +91 87369 14818", "sudo hire me": "Permission granted. Let's build something useful." };
+    const terminalForm = qs("#terminal-form"), terminalInput = qs("#terminal-input"), terminalOutput = qs("#terminal-output");
+    terminalForm.addEventListener("submit", e => { e.preventDefault(); const command = terminalInput.value.trim(), normalized = command.toLowerCase(); if (!command) return; terminalOutput.insertAdjacentHTML("beforeend", `<p class="interactive-line command">${command.replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]))}</p><p class="interactive-line response">${commandResponses[normalized] || `command not found: ${command} — try 'help'`}</p>`); terminalInput.value = ""; terminalOutput.scrollTop = terminalOutput.scrollHeight; });
+    const paletteBackdrop = qs("#palette-backdrop"), paletteSearch = qs("#palette-search"), paletteItems = qs("#palette-items");
+    const paletteCommands = [{label:"Go to About", action:() => qs("#about").scrollIntoView({behavior:"smooth"})}, {label:"Go to Projects", action:() => qs("#projects").scrollIntoView({behavior:"smooth"})}, {label:"Go to History", action:() => qs("#history").scrollIntoView({behavior:"smooth"})}, {label:"Go to Skills", action:() => qs("#skills").scrollIntoView({behavior:"smooth"})}, {label:"Go to Contact", action:() => qs("#contact").scrollIntoView({behavior:"smooth"})}, {label:"Copy email address", action:() => navigator.clipboard.writeText("shabdsrivastava19@gmail.com")}, {label:"Open GitHub", action:() => open("https://github.com/Shades19-afk", "_blank", "noopener") }];
+    function renderPalette(filter = "") { paletteItems.innerHTML = ""; paletteCommands.filter(c => c.label.toLowerCase().includes(filter.toLowerCase())).forEach(c => { const item = document.createElement("button"); item.className = "palette-item"; item.textContent = c.label; item.onclick = () => { c.action(); closePalette(); }; paletteItems.append(item); }); }
+    function openPalette() { renderPalette(); paletteBackdrop.classList.add("open"); paletteBackdrop.setAttribute("aria-hidden", "false"); paletteSearch.value = ""; paletteSearch.focus(); }
+    function closePalette() { paletteBackdrop.classList.remove("open"); paletteBackdrop.setAttribute("aria-hidden", "true"); }
+    qs("#palette-trigger").onclick = openPalette; paletteSearch.oninput = e => renderPalette(e.target.value); paletteBackdrop.addEventListener("click", e => { if (e.target === paletteBackdrop) closePalette(); }); addEventListener("keydown", e => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); openPalette(); } if (e.key === "Escape") closePalette(); }); renderPalette();
     if (!reduce) {
       const canvas = qs("#network"), ctx = canvas.getContext("2d"); let nodes = [], mouse = {x:-1000,y:-1000};
       function resize() { canvas.width = innerWidth; canvas.height = innerHeight; nodes = Array.from({length:60}, () => ({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18})); }
